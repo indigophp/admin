@@ -1,0 +1,31 @@
+{
+    "name": "indigophp/admin",
+    "type": "fuelphp-component",
+    "description": "IndigoPHP admin component",
+    "keywords": ["indigo", "admin", "fuelphp"],
+    "homepage": "https://indigophp.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Márk Sági-Kazár",
+            "email": "mark.sagikazar@gmail.com"
+        },
+        {
+            "name": "Tamás Barta",
+            "email": "barta.tamas.d@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "fuelphp/component-installer": "dev-master",
+        "twig/twig": "dev-master",
+        "indigophp/fuelphp-menu": "dev-develop"
+    },
+    "autoload": {
+        "psr-4": {
+            "Indigo\\Admin\\": "classes/"
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
