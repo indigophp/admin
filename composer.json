@@ -19,6 +19,7 @@
         "php": ">=5.4.0",
         "fuelphp/component-installer": "dev-master",
         "twig/twig": "dev-master",
+        "fuelphp/auth": "dev-master",
         "indigophp/fuelphp-menu": "dev-develop"
     },
     "autoload": {
