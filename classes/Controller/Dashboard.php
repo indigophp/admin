@@ -11,7 +11,7 @@
 
 namespace Indigo\Admin\Controller;
 
-class Welcome extends \Fuel\Controller\Base
+class Dashboard extends \Fuel\Controller\Base
 {
 	/**
 	 * The basic welcome message
@@ -20,7 +20,7 @@ class Welcome extends \Fuel\Controller\Base
 	 */
 	public function actionIndex()
 	{
-		return \View::forge('welcome/index.twig');
+		return \View::forge('dashboard/index.twig');
 	}
 
 	/**
@@ -30,7 +30,6 @@ class Welcome extends \Fuel\Controller\Base
 	 */
 	public function action404()
 	{
-		return \Response::forge('html', \View::forge('welcome/404.twig'), 404);
+		return \Response::forge('html', \View::forge('dashboard/404.twig'), 404);
 	}
-
 }
