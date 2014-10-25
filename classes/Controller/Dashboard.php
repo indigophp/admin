@@ -11,54 +11,30 @@
 
 namespace Indigo\Admin\Controller;
 
-use Fuel\Auth\Manager;
-use Fuel\Auth\Storage;
-use Fuel\Auth\Persistence;
-use Fuel\Auth\User;
-use Fuel\Auth\Group;
-use Fuel\Auth\Role;
-use Fuel\Auth\Acl;
-
-class Dashboard extends \Fuel\Controller\Base
+/**
+ * Admin controller
+ *
+ * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
+ */
+class Dashboard extends Base
 {
 	/**
-	 * Auth Manager
-	 *
-	 * @var Manager
+	 * {@inheritdoc}
 	 */
-	protected $auth;
-
-	protected function getAuth()
-	{
-		if ( ! $this->auth)
-		{
-			$this->auth = new Manager(
-				new Storage\File(['file' => '/tmp']),
-				new Persistence\File(['file' => '/tmp'])
-			);
-
-			// assign our Auth drivers
-			$this->auth->addDriver(new User\File(['min_password_length' => 6, 'new_password_length' => 8, 'file' => '/tmp']), 'user');
-			$this->auth->addDriver(new Group\File(['file' => '/tmp']), 'group');
-			$this->auth->addDriver(new Role\File(['file' => '/tmp']), 'role');
-			$this->auth->addDriver(new Acl\File(['file' => '/tmp']), 'acl');
-		}
-
-		return $this->auth;
-	}
-
 	public function before()
 	{
 		$manager = $this->getAuth();
 
-		if ($manager->check()) {
+		if ( ! $manager->check() and ! in_array($this->route->action, ['Login', '404']))
+		{
+			return \Response::forge('redirect', 'admin/login', 'location', 403);
 		}
 	}
 
 	/**
 	 * The basic welcome message
 	 *
-	 * @return \View
+	 * @return View
 	 */
 	public function actionIndex()
 	{
@@ -66,12 +42,59 @@ class Dashboard extends \Fuel\Controller\Base
 	}
 
 	/**
+	 * Login
+	 *
+	 * @return View
+	 */
+	public function actionLogin()
+	{
+		$auth = $this->getAuth();
+
+		if ($auth->check())
+		{
+			return $this->redirectLoggedIn();
+		}
+
+		if ($this->request->getInput()->getMethod() === 'POST')
+		{
+			$user = $this->request->getInput()->getParam('username');
+			$password = $this->request->getInput()->getParam('password');
+
+			if ($auth->login($user, $password))
+			{
+				return $this->redirectLoggedIn();
+			}
+		}
+
+		return \View::forge('login.twig');
+	}
+
+	protected function redirectLoggedIn()
+	{
+		$uri = $this->request->getInput()->getParam('uri', 'admin');
+
+		return \Response::forge('redirect', $uri);
+	}
+
+	/**
+	 * Logout
+	 *
+	 * @return Response
+	 */
+	public function actionLogout()
+	{
+		$this->getAuth()->logout();
+
+		return \Response::forge('redirect', 'admin/login');
+	}
+
+	/**
 	 * The 404 action for the application.
 	 *
-	 * @return \Response
+	 * @return Response
 	 */
 	public function action404()
 	{
-		return \Response::forge('html', \View::forge('dashboard/404.twig'), 404);
+		return \Response::forge('html', \View::forge('404.twig'), 404);
 	}
 }

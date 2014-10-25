@@ -17,7 +17,9 @@
  */
 
 // 404 route
-$this->router->all(null, 'admin/dashboard/404', '404');
+$this->router->all(null, 'admin/admin/404', '404');
 
 // homepage route
 $this->router->all('/', 'admin/dashboard/index', 'root');
+$this->router->all('login', 'admin/dashboard/login');
+$this->router->all('logout', 'admin/dashboard/logout');
