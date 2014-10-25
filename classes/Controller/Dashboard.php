@@ -18,11 +18,18 @@ namespace Indigo\Admin\Controller;
  */
 class Dashboard extends Base
 {
+	use \Indigo\Common\Controller\Theme
+	{
+		before as private _before;
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
 	public function before()
 	{
+		$this->_before();
+
 		$manager = $this->getAuth();
 
 		if ( ! $manager->check() and ! in_array($this->route->action, ['Login', '404']))
