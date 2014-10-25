@@ -10,7 +10,8 @@
  */
 
 return [
-	'parsers' => [
-		'twig',
+	'active' => 'default',
+	'paths' => [
+		DOCROOT.'../themes/'
 	],
 ];
