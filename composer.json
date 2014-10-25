@@ -17,10 +17,9 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "fuelphp/component-installer": "dev-master",
+        "composer/installers": "dev-master",
         "twig/twig": "dev-master",
-        "fuelphp/auth": "dev-master",
-        "indigophp/fuelphp-menu": "dev-develop"
+        "fuelphp/auth": "dev-master"
     },
     "autoload": {
         "psr-4": {
