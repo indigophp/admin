@@ -16,10 +16,13 @@
  * It contains configuration which is for this application only.
  */
 
+// We need this to be able to route to admin when it is the root component
+$uri = $this->getUri();
+
 // 404 route
-$this->router->all(null, 'admin/admin/404', '404');
+$this->router->all(null, $uri.'/dashboard/404', '404');
 
 // homepage route
-$this->router->all('/', 'admin/dashboard/index', 'root');
-$this->router->all('login', 'admin/dashboard/login');
-$this->router->all('logout', 'admin/dashboard/logout');
+$this->router->all('/', $uri.'/dashboard/index', 'root');
+$this->router->all('login', $uri.'/dashboard/login');
+$this->router->all('logout', $uri.'/dashboard/logout');
