@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="shortcut icon" href="assets/ico/favicon.png">
+	<link rel="shortcut icon" href="/{{ asset_path ~ theme }}/ico/favicon.png">
 
 	<title>{% if not title is empty %}{{ title }} &raquo; {% endif %}{{ site_name }}</title>
 
 	{% block head %}
-	<link rel="stylesheet" href="css/style.css" title="Indigo theme">
+	<link rel="stylesheet" href="/{{ asset_path ~ theme }}/css/style.css" title="Indigo theme">
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
-		<script src="js/lib/html5shiv.js"></script>
-		<script src="js/lib/respond.min.js"></script>
+		<script src="/{{ asset_path ~ theme }}/js/lib/html5shiv.js"></script>
+		<script src="/{{ asset_path ~ theme }}/js/lib/respond.min.js"></script>
 	<![endif]-->
 	{% endblock %}
 
@@ -21,40 +21,92 @@
 
 <body>
 
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				{# <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button> #}
-				<a class="navbar-brand" href="">{{ site_name }}</a>
-			</div>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/admin/">{{ site_name }}</a>
+			<a class="navbar-brand" href="/"><small>back to site &raquo;</small></a>
 		</div>
+		<div class="hidden-xs">
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="" class="account dropdown-toggle" data-toggle="dropdown">
+						<span class="menu-gravatar" style="background-image:url(https://secure.gravatar.com/avatar/{{ current_user.email }}?s=30&amp;d=mm)"></span>
+						<span class="user-and-welcome-wrapper">
+							<small class="welcome-text">welcome,</small>
+							<span class="username">{{ current_user.fullname }}</span>
+						</span>
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/admin/profile">Profile</a></li>
+						<li class="divider"></li>
+						<li><a href="/admin/logout">Sign out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse no-transition">
+			<nav class="side-navigation">
+				<div class="side-navigation-wrapper">
+					<div class="visible-xs">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="">
+								<button class="account" data-toggle="collapse" data-target="#account-menu">
+									<span class="menu-gravatar" style="background-image:url(https://secure.gravatar.com/avatar/{{ current_user.email }}?s=30&amp;d=mm)"></span>
+									<span class="user-and-welcome-wrapper">
+										<small class="welcome-text">welcome,</small>
+										<span class="username">{{ current_user.fullname }}</span>
+									</span>
+									<b class="caret"></b>
+								</button>
+								<ul class="collapse" id="account-menu">
+									<li><a href="/admin/profile">Profile</a></li>
+									<li><a href="/admin/logout">Sign out</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div><!-- /.visible-xs -->
+					{# {{ knp_menu_render('admin', {'template': 'admin/menu.twig'}, 'admin') }} #}
+				</div> <!-- /.side-navigation-wrapper -->
+				<div class="side-navigation-footer">
+					Aucsa
+				</div>
+			</nav>
+
+		</div><!--/.nav-collapse -->
 		<!-- </div> -->
 	</div>
 
-	{% block content %}{% endblock %}
 
-	<div class="container">
-		<hr>
-		<footer>
-			{% set version = '0.1-dev' %}
-			<div class="pull-left"><a href="">IndigoPHP</a> is released under the MIT license.<br><small>Version: {{ version }}</small></div>
-			<div class="pull-right">Page rendered in {exec_time}s using {mem_usage}mb of memory.</div>
+
+	<div class="content-wrap">
+		{# {% include 'admin/alert/alert.twig' %} #}
+		{% block content %}{% endblock %}
+
+		<footer class="content-wrap-footer">
+			<hr>
+			© 2013-2014 Indigo Admin by <a href="https://indigophp.com">Indigo</a>
 		</footer>
-	</div>
 
+	</div><!-- /.content-wrap -->
 
 	{% block javascript %}
-	<script src="js/lib/jquery.min.js"></script>
-	<script src="js/lib/jquery-migrate.min.js"></script>
-	<script src="js/lib/bootstrap.min.js"></script>
+	<script src="/{{ asset_path ~ theme }}/js/lib/jquery.min.js"></script>
+	<script src="/{{ asset_path ~ theme }}/js/lib/jquery-migrate.min.js"></script>
+	<script src="/{{ asset_path ~ theme }}/js/lib/bootstrap.min.js"></script>
 	{% endblock %}
 
+	<script src="/{{ asset_path ~ theme }}/js/admin.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			// TODO: base url here
+			IndigoAdmin.pageInit('');
 			{% block documentready %}{% endblock %}
 		});
 	</script>

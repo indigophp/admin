@@ -45,7 +45,7 @@ class Dashboard extends Base
 	 */
 	public function actionIndex()
 	{
-		return \View::forge('dashboard/index.twig');
+		return \View::forge('index.twig');
 	}
 
 	/**
