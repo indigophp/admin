@@ -32,9 +32,13 @@ class Dashboard extends Base
 
 		$manager = $this->getAuth();
 
-		if ( ! $manager->check() and ! in_array($this->route->action, ['Login', '404']))
+		if ( ! in_array($this->route->action, ['Login', '404']))
 		{
-			return \Response::forge('redirect', 'admin/login', 'location', 403);
+			return parent::before();
+		}
+		else
+		{
+			\View::setGlobal('admin_uri', $this->getUri());
 		}
 	}
 
@@ -78,7 +82,7 @@ class Dashboard extends Base
 
 	protected function redirectLoggedIn()
 	{
-		$uri = $this->request->getInput()->getParam('uri', 'admin');
+		$uri = $this->request->getInput()->getParam('uri', $this->getUri());
 
 		return \Response::forge('redirect', $uri);
 	}
@@ -91,8 +95,9 @@ class Dashboard extends Base
 	public function actionLogout()
 	{
 		$this->getAuth()->logout();
+		$uri = $this->getUri();
 
-		return \Response::forge('redirect', 'admin/login');
+		return \Response::forge('redirect', $uri.'login');
 	}
 
 	/**

@@ -53,15 +53,36 @@ abstract class Base extends \Fuel\Controller\Base
 	}
 
 	/**
+	 * Returns an URI without left trailing slash
+	 *
+	 * @return string
+	 */
+	protected function getUri()
+	{
+		$uri = $this->request->getComponent()->getUri();
+
+		// Make sure we have a proper ending slash
+		if ($uri !== '')
+		{
+			$uri = rtrim($uri, '/').'/';
+		}
+
+		return $uri;
+	}
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public function before()
 	{
 		$manager = $this->getAuth();
+		$uri = $this->getUri();
 
 		if ( ! $manager->check())
 		{
-			return \Response::forge('redirect', 'admin/login', 'location', 403);
+			return \Response::forge('redirect', $uri.'login', 'location', 403);
 		}
+
+		\View::setGlobal('admin_uri', $uri);
 	}
 }
