@@ -1,10 +1,10 @@
 {
 	"name": "indigophp/admin",
 	"type": "fuelphp-component",
-	"description": "IndigoPHP admin component",
+	"description": "IndigoPHP Admin component",
+	"license": "MIT",
 	"keywords": ["indigo", "admin", "fuelphp"],
 	"homepage": "https://indigophp.com",
-	"license": "MIT",
 	"authors": [
 		{
 			"name": "Tamás Barta",
@@ -20,7 +20,8 @@
 		"composer/installers": "dev-master",
 		"indigophp/admin-theme": "dev-develop",
 		"indigophp/common": "dev-develop",
-		"fuelphp/auth": "dev-master"
+		"fuelphp/auth": "dev-master",
+		"indigophp/fuelphp-doctrine": "dev-develop"
 	},
 	"autoload": {
 		"psr-4": {
