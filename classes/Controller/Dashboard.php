@@ -30,9 +30,7 @@ class Dashboard extends Base
 	{
 		$this->_before();
 
-		$manager = $this->getAuth();
-
-		if ( ! in_array($this->route->action, ['Login', '404']))
+		if ( ! in_array($this->route->action, ['Login', 'Logout']))
 		{
 			return parent::before();
 		}
