@@ -21,7 +21,8 @@
 		"indigophp/admin-theme": "dev-develop",
 		"indigophp/common": "dev-develop",
 		"fuelphp/auth": "dev-master",
-		"indigophp/fuelphp-doctrine": "dev-develop"
+		"indigophp/fuelphp-doctrine": "dev-develop",
+		"indigophp/fuelphp-menu": "dev-develop"
 	},
 	"autoload": {
 		"psr-4": {
