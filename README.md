@@ -16,9 +16,6 @@ $ composer require indigophp/admin
 ```
 
 
-## Usage
-
-
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
