@@ -18,7 +18,7 @@
 	"require": {
 		"php": ">=5.4.0",
 		"composer/installers": "dev-master",
-		"indigophp/admin-theme": "dev-develop",
+		"indigophp/admin-theme": "dev-master",
 		"indigophp/common": "dev-develop",
 		"fuelphp/auth": "dev-master",
 		"indigophp/fuelphp-doctrine": "dev-develop",
